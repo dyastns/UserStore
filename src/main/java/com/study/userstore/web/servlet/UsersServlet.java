@@ -26,7 +26,7 @@ public class UsersServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 
         PageGenerator pageGenerator = PageGenerator.instance();
-        String page = pageGenerator.getPage("users.ftl", parameters);
+        String page = pageGenerator.getPage("users.html", parameters);
         response.getWriter().write(page);
     }
 
