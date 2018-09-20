@@ -19,7 +19,6 @@ public class JdbcUserDaoITest {
         assertFalse(actualUsers.isEmpty());
         for (User user : actualUsers) {
             assertNotNull(user);
-            assertNotNull(user.getId());
             assertNotNull(user.getFirstName());
             assertNotNull(user.getLastName());
             //System.out.println(user);

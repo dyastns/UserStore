@@ -14,6 +14,7 @@
         <th>Lastname</th>
         <th>Salary</th>
         <th>Date of birth</th>
+        <th>Action</th>
     </tr>
     <#list users as user>
         <tr>
@@ -23,6 +24,11 @@
             <td class="table__salary"><#if (user.salary)??>${user.salary?string(",##0.00")}</#if></td>
             <td class="table__date-of-birth">
                 <#if (user.dateOfBirth)??>${user.dateOfBirth}</#if>
+            </td>
+            <td>
+                <form action="/users/remove/${user.id}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
             </td>
         </tr>
     </#list>

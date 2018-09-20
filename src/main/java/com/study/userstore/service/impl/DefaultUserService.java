@@ -14,6 +14,16 @@ public class DefaultUserService implements UserService {
         return userDao.getAll();
     }
 
+    @Override
+    public int addUser(User user) {
+        return userDao.addUser(user);
+    }
+
+    @Override
+    public int removeUserById(int id) {
+        return userDao.removeUserById(id);
+    }
+
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
