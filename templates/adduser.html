@@ -1,23 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
     <title>Add user</title>
 </head>
 <body>
-<h2>Add user</h2>
-<form action="/users/add" method="post">
-    User Id:<br>
-    <input type="text" name="id"><br>
-    First name:<br>
-    <input type="text" name="firstname"><br>
-    Last name:<br>
-    <input type="text" name="lastname"><br>
-    Salary:<br>
-    <input type="text" name="salary"><br>
-    Date of birth:<br>
-    <input type="text" name="dateofbirth"><br>
-    <button type="submit">Add user</button>
-</form>
+<nav class="navbar navbar-expand-sm navbar-light bg-info">
+    <a class="navbar-brand" href="/users">
+        <i class="fas fa-users"></i>
+        User store
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Open navigation</span>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/users">Users</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/users/add">Add user <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <h2>Add user</h2>
+        <div class="container">
+            <form action="/users/add" method="post">
+                <div class="form-group row">
+                    <label for="inputUserId" class="col-md-2 col-form-label col-form-label-sm">User Id</label>
+                    <div class="col-md-2">
+                        <input id="inputUserId" type="text" class="form-control form-control-sm" name="id" placeholder="11" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputFirstName" class="col-md-2 col-form-label col-form-label-sm">First name</label>
+                    <div class="col-md-4">
+                        <input id="inputFirstName" class="form-control form-control-sm" type="text" name="firstname" placeholder="John" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLastName" class="col-md-2 col-form-label col-form-label-sm">Last name</label>
+                    <div class="col-md-4">
+                        <input id="inputLastName" class="form-control form-control-sm" type="text" name="lastname" placeholder="Silver" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputSalary" class="col-md-2 col-form-label col-form-label-sm">Salary</label>
+                    <div class="col-md-2">
+                        <input id="inputSalary" class="form-control form-control-sm" type="text" name="salary" placeholder="4000.00">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDateOfBirth" class="col-md-2 col-form-label col-form-label-sm">Date of birth</label>
+                    <div class="col-md-2">
+                        <input id="inputDateOfBirth" class="form-control form-control-sm" type="text" name="dateofbirth" placeholder="1710-12-07" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 offset-md-2">
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-user-plus"></i>
+                            Add user
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <#if (result)??>
+            <#if result == 1>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>User was added:</strong>
+                    User id=${user.id}, first name=${user.firstName}, last name=${user.lastName}, salary=${user.salary?string(",##0.00")}, date of birth=${user.dateOfBirth}
+                </div>
+            <#else>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>!Error occurred,</strong> user weren't added.
+                </div>
+            </#if>
+        </#if>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

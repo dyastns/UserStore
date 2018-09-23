@@ -37,12 +37,16 @@ public class UsersAddServlet extends HttpServlet {
         user.setSalary(Double.parseDouble(requestParameters.get("salary")[0]));
         user.setDateOfBirth(LocalDate.parse(requestParameters.get("dateofbirth")[0]));
         int result = userService.addUser(user);
-        //will be changed:
-        if (result == 1) {
-            response.getWriter().println("User were added: " + user.toString());
-        } else {
-            response.getWriter().println("!Error occurred, user weren't added");
-        }
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("user", user);
+        parameters.put("result", result);
+
+        response.setContentType("text/html;charset=utf-8");
+
+        PageGenerator pageGenerator = PageGenerator.instance();
+        String page = pageGenerator.getPage("adduser.html", parameters);
+        response.getWriter().write(page);
     }
 
     public void setUserService(UserService userService) {
